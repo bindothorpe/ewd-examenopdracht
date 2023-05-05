@@ -21,7 +21,8 @@ public class EwdExamenopdrachtApplication implements WebMvcConfigurer{
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/book");
+        registry.addRedirectViewController("/", "/books");
+        registry.addViewController("/403").setViewName("403");
     }
 
     @GetMapping("/hello")

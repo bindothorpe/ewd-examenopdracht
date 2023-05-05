@@ -1,12 +1,10 @@
 package domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,10 +18,23 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String title;
+    @Column
     private double price;
+    @Column
     private String ISBN;
+    @Column
     private String coverUrl;
+
+    @ManyToMany(mappedBy = "bookList")
+    private List<User> usersList;
+
+    @ManyToMany(mappedBy = "bookList")
+    private List<Author> authors;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
+    private List<Location> locations;
 
     public Book(String title, double price, String ISBN, String coverUrl) {
         this.title = title;

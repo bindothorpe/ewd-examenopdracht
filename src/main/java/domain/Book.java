@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,13 +19,9 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String title;
-    @Column
     private double price;
-    @Column
     private String ISBN;
-    @Column
     private String coverUrl;
 
     @ManyToMany(mappedBy = "bookList")
@@ -41,5 +38,20 @@ public class Book implements Serializable {
         this.price = price;
         this.ISBN = ISBN;
         this.coverUrl = coverUrl;
+        usersList = new ArrayList<>();
+        authors = new ArrayList<>();
+        locations = new ArrayList<>();
+    }
+
+    public String getAuthorsAsString() {
+        if(authors.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (Author author : authors) {
+            sb.append(author.getName()).append(", ");
+        }
+        return sb.substring(0, sb.toString().length() - 2);
     }
 }

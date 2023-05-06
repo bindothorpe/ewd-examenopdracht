@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,9 +19,19 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique=true)
+    private String username;
+
     private int maxBooks;
 
     @ManyToMany
     private List<Book> bookList;
+
+
+    public User(String username, int maxBooks) {
+
+        this.username = username;
+        this.maxBooks = maxBooks;
+        bookList = new ArrayList<>();
+    }
 }

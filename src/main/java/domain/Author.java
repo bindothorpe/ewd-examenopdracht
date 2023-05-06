@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,4 +22,9 @@ public class Author implements Serializable {
 
     @ManyToMany
     private List<Book> bookList;
+
+    public Author(String name) {
+        this.name = name;
+        bookList = new ArrayList<>();
+    }
 }

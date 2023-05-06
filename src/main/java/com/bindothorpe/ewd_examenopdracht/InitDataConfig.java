@@ -33,7 +33,10 @@ public class InitDataConfig implements CommandLineRunner {
         books.add(new Book("Jobless Reincarnation vol 15", 13.8, "978-0-6368-0454-8", "https://kbimages1-a.akamaihd.net/cc08905b-6d4a-4ab2-8ea4-cc2ea879abcf/1200/1200/False/mushoku-tensei-jobless-reincarnation-light-novel-vol-15.jpg"));
         books.add(new Book("De meeste mensen deugen", 10.5, "978-6-6259-6059-2", "https://media.s-bol.com/NkD9WD1mzx48/798x1200.jpg"));
 
+
+        User admin = new User("nameAdmin", 5);
         users.add(new User("nameUser", 3));
+        users.add(admin);
 
         authors.add(new Author("Rudeus"));
         authors.add(new Author("Bindo"));
@@ -47,11 +50,16 @@ public class InitDataConfig implements CommandLineRunner {
             }
 
             for (User user : users) {
+                if (user.getUsername().equals("nameAdmin"))
+                    continue;
                 user.getBookList().add(book);
                 book.getUsersList().add(user);
             }
 
         }
+
+        admin.getBookList().add(books.get(0));
+        books.get(0).getUsersList().add(admin);
 
         bookRepository.saveAll(books);
         userRepository.saveAll(users);

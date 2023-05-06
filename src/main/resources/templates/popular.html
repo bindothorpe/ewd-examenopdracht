@@ -7,7 +7,7 @@
 </head>
 <body>
 <!--    Header-->
-<div class="flex bg-purple-500 justify-between align-middle">
+<div class="flex bg-purple-500 justify-between align-middle sticky top-0 z-50">
     <div class="container flex justify-between align-middle mx-auto">
         <div class="py-5 pl-5">
             <img class="h-8" th:alt="logo" th:src="@{/logo.png}"/>
@@ -23,6 +23,37 @@
                     <input class="cursor-pointer" type="submit" value="logout"/>
                     <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
                 </form>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--    Books-->
+
+<div class="container mx-auto">
+
+
+    <div class="w-full flex mt-4">
+        <div class="inline-grid grid-cols-3 gap-4 mx-auto justify-between">
+            <!--            page title-->
+            <span class="text-4xl font-bold col-span-3">Most favorite books</span>
+
+            <!--            grid-->
+            <a class="w-64 p-4 h-auto bg-white flex flex-col rounded-md drop-shadow-md hover:border-purple-500 border-2 overflow-hidden" th:each="book: ${books}"
+               th:href="|/book/${book.getId()}|">
+                <!--            book cover-->
+                <div class="flex w-40 overflow-hidden mx-auto">
+                    <img class="object-cover w-40 h-64" th:alt="${book.getTitle()}" th:src="@{${book.getCoverUrl()}}"/>
+                </div>
+                <!--            book title-->
+                <p class="text-lg font-bold truncate" th:text="${book.getTitle()}">
+                </p>
+                <!--            book authors-->
+                <div class="text-ellipsis overflow-hidden" th:text="${book.getAuthorsAsString()}">
+                </div>
+                <!--            book authors-->
+                <div class="text-ellipsis overflow-hidden" th:text="|Saved ${book.getUsersList().size()} times|">
+                </div>
             </a>
         </div>
     </div>

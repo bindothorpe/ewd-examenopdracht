@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries(
+        {
+                @NamedQuery(name = "Book.findMostSavedList", query = "SELECT b FROM Book b ORDER BY SIZE(b.usersList) DESC, b.title ASC"),
+        }
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(exclude = "id")
@@ -44,7 +49,7 @@ public class Book implements Serializable {
     }
 
     public String getAuthorsAsString() {
-        if(authors.isEmpty()) {
+        if (authors.isEmpty()) {
             return "";
         }
 

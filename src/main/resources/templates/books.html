@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
@@ -7,25 +7,54 @@
 </head>
 <body>
 <!--    Header-->
-    <div class="flex bg-purple-500 justify-between align-middle">
-        <div class="container flex justify-between align-middle mx-auto">
-            <div class="py-5 pl-5">
-                <img th:src="@{/logo.png}" th:alt="logo" class="h-8"/>
-            </div>
-            <div class="flex py-5 md:text-xl text-5xl font-bold">
-                <a href="/books" class="pr-2 text-white">books</a>
-                <a href="/popular" class="pr-2 text-white">popular</a>
-                <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                    <a href="/create" class="pr-2 text-white">create</a>
-                </th:block>
-                <a class="flex pr-5 text-white pb-1">
-                    <form th:action="@{/logout}" method="post" class="flex">
-                        <input type="submit" value="logout" class="cursor-pointer"/>
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                    </form>
-                </a>
-            </div>
+<div class="flex bg-purple-500 justify-between align-middle">
+    <div class="container flex justify-between align-middle mx-auto">
+        <div class="py-5 pl-5">
+            <img class="h-8" th:alt="logo" th:src="@{/logo.png}"/>
+        </div>
+        <div class="flex py-5 md:text-xl text-5xl font-bold">
+            <a class="pr-2 text-white" href="/books">books</a>
+            <a class="pr-2 text-white" href="/popular">popular</a>
+            <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <a class="pr-2 text-white" href="/create">create</a>
+            </th:block>
+            <a class="flex pr-5 text-white pb-1">
+                <form class="flex" method="post" th:action="@{/logout}">
+                    <input class="cursor-pointer" type="submit" value="logout"/>
+                    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+                </form>
+            </a>
         </div>
     </div>
+</div>
+
+<!--    Books-->
+
+<div class="container mx-auto">
+
+
+    <div class="w-full flex mt-4">
+        <div class="inline-grid grid-cols-3 gap-4 mx-auto justify-between">
+            <!--            page title-->
+            <span class="text-4xl font-bold col-span-3">Books</span>
+
+            <!--            grid-->
+            <a class="w-64 p-4 h-auto bg-white flex flex-col rounded-md drop-shadow-md hover:border-purple-500 border-2 overflow-hidden" th:each="book: ${books}"
+               th:href="|/book/${book.getId()}|">
+                <!--            book cover-->
+                <div class="flex w-40 overflow-hidden mx-auto">
+                    <img class="object-cover w-40 h-64" th:alt="${book.getTitle()}" th:src="@{${book.getCoverUrl()}}"/>
+                </div>
+                <!--            book title-->
+                <p class="text-lg font-bold truncate" th:text="${book.getTitle()}">
+                </p>
+                <!--            book authors-->
+                <div class="text-ellipsis overflow-hidden" th:text="${book.getAuthorsAsString()}">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -66,15 +66,4 @@ public class BooksController {
     }
 
 
-//    @PostMapping(value = "/toggle/{id}")
-//    public String toggleBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
-//        if(userRepository.findByUsername(auth.getName()).getBookList().contains(bookService.findById(id))) {
-//            bookService.removeUserFromUsersList(id, userRepository.findByUsername(auth.getName()).getId());
-//        } else {
-//            bookService.addUserToUsersList(id, userRepository.findByUsername(auth.getName()).getId());
-//        }
-//        return "redirect:/books/" + id;
-//    }
-
-
 }

@@ -17,8 +17,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     Book findByISBN(String isbn);
     Book findByTitle(String title);
 
-//    void removeUserFromUsersList(Long id);
-
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO user_book_list (users_list_id, book_list_id) VALUES (:userId, :bookId)", nativeQuery = true)

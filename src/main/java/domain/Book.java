@@ -14,8 +14,6 @@ import java.util.List;
 @NamedQueries(
         {
                 @NamedQuery(name = "Book.findMostSavedList", query = "SELECT b FROM Book b ORDER BY SIZE(b.usersList) DESC, b.title ASC"),
-//                @NamedQuery(name = "Book.removeUserFromUsersList", query = "DELETE FROM favorites f")
-//                @NamedQuery(name = "Book.removeUserFromUsersList", query = "DELETE FROM Book b WHERE b.id = :id""),
         }
 
 )
@@ -39,7 +37,6 @@ public class Book implements Serializable {
     private List<User> usersList;
 
     @ManyToMany(mappedBy = "bookList")
-//    @JoinTable(name = "favorites")
     private List<Author> authors;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
@@ -66,14 +63,5 @@ public class Book implements Serializable {
         }
         return sb.substring(0, sb.toString().length() - 2);
     }
-
-//    public void removeUserFromUsersList(User user) {
-//        usersList.remove(user);
-//        user.getBookList().remove(this);
-//    }
-//
-//    public void removeUserFromUsersList(Long l) {
-//        System.out.println("long" + l);
-//    }
 
 }

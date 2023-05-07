@@ -3,6 +3,7 @@ package com.bindothorpe.ewd_examenopdracht;
 import domain.Book;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import repository.AuthorRepository;
@@ -52,19 +53,28 @@ public class BooksController {
     }
 
     @PostMapping(value = "/add/{id}")
-    public String addBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
+    public String addBookToUser(@PathVariable("id") Long id, Model model, Authentication auth) {
         bookService.addUserToUsersList(id, userRepository.findByUsername(auth.getName()).getId());
-        System.out.println("add called");
         return "redirect:/books/" + id;
     }
 
+
     @PostMapping(value = "/remove/{id}")
     public String removeBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
-        System.out.println("remove called");
         bookService.removeUserFromUsersList(id, userRepository.findByUsername(auth.getName()).getId());
-        System.out.println("remove called");
         return "redirect:/books/" + id;
     }
+
+
+//    @PostMapping(value = "/toggle/{id}")
+//    public String toggleBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
+//        if(userRepository.findByUsername(auth.getName()).getBookList().contains(bookService.findById(id))) {
+//            bookService.removeUserFromUsersList(id, userRepository.findByUsername(auth.getName()).getId());
+//        } else {
+//            bookService.addUserToUsersList(id, userRepository.findByUsername(auth.getName()).getId());
+//        }
+//        return "redirect:/books/" + id;
+//    }
 
 
 }

@@ -32,7 +32,7 @@
 
 <div class="container mx-auto">
     <div class="w-max flex mt-4 mx-auto">
-        <img class="h-96" th:src="@{${book.getCoverUrl()}}" th:alt="${book.getTitle()}"/>
+        <img class="h-96" th:alt="${book.getTitle()}" th:src="@{${book.getCoverUrl()}}"/>
         <div class="pl-4  flex flex-col justify-between h-96 ">
             <div>
                 <span class="block font-bold text-3xl break-words" th:text="${book.getTitle()}"></span>
@@ -50,21 +50,28 @@
                 </div>
                 <div>
                     <span class="font-xl">Price: </span>
-                    <span class="font-xl text-gray-500" th:text="|&euro;${#numbers.formatDecimal(book.getPrice(), 1, 2, 'COMMA')}|"></span>
+                    <span class="font-xl text-gray-500"
+                          th:text="|&euro;${#numbers.formatDecimal(book.getPrice(), 1, 2, 'COMMA')}|"></span>
                 </div>
             </div>
 
             <div>
-                <th:block th:unless="${hasBook}">
-                    <form action="#" method="post" th:action="|add/${book.getId()}|" >
-                        <input type="submit" value="Add to favorites" class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded w-64"/>
-                    </form>
-                </th:block>
-                <th:block th:if="${hasBook}">
-                    <form action="#" method="post" th:action="|remove/${book.getId()}|" >
-                        <input type="button" value="Remove from favorites" class="bg-transparent hover:bg-purple-400 text-purple-500 font-bold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded w-64"/>
-                    </form>
-                </th:block>
+                    <th:block th:unless="${hasBook}">
+                        <form action="#" method="post" th:action="|add/${book.getId()}|">
+                            <input class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded w-64"
+                                   type="submit"
+                                   value="Add to favorites"/>
+                        </form>
+                    </th:block>
+
+                    <th:block th:if="${hasBook}">
+                        <form action="#" method="post" th:action="|remove/${book.getId()}|">
+                            <input class="bg-transparent hover:bg-purple-400 text-purple-500 font-bold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded w-64"
+                                   type="submit"
+                                   value="Remove from favorites"/>
+                        </form>
+                    </th:block>
+
             </div>
         </div>
     </div>

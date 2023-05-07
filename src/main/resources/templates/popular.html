@@ -7,24 +7,25 @@
 </head>
 <body>
 <!--    Header-->
-<div class="flex bg-purple-500 justify-between align-middle sticky top-0 z-50">
-    <div class="container flex justify-between align-middle mx-auto">
-        <div class="py-5 pl-5">
+<div class="bg-purple-500 text-white text-xl font-bold w-screen flex align-middle justify-between align-middle sticky top-0 z-50">
+    <div class="py-5 pl-5 flex align-middle">
+        <a href="/books">
             <img class="h-8" th:alt="logo" th:src="@{/logo.png}"/>
-        </div>
-        <div class="flex py-5 md:text-xl text-5xl font-bold">
-            <a class="pr-2 text-white" href="/books">books</a>
-            <a class="pr-2 text-white" href="/popular">popular</a>
-            <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                <a class="pr-2 text-white" href="/create">create</a>
-            </th:block>
-            <a class="flex pr-5 text-white pb-1">
-                <form class="flex" method="post" th:action="@{/logout}">
-                    <input class="cursor-pointer" type="submit" value="logout"/>
-                    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-                </form>
-            </a>
-        </div>
+        </a>
+        <span class="pl-5 cursor-default" th:text="|Hi ${user.getUsername()}|" ></span>
+    </div>
+    <div class="flex py-5">
+        <a class="pr-2" href="/books">books</a>
+        <a class="pr-2" href="/popular">popular</a>
+        <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <a class="pr-2" href="/create">create</a>
+        </th:block>
+        <a class="flex pr-5 pb-1">
+            <form class="flex" method="post" th:action="@{/logout}">
+                <input class="cursor-pointer" type="submit" value="logout"/>
+                <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+            </form>
+        </a>
     </div>
 </div>
 

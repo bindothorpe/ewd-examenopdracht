@@ -11,6 +11,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import service.BookService;
 import service.BookServiceImpl;
+import service.UserService;
+import service.UserServiceImpl;
 
 @SpringBootApplication
 @EnableJpaRepositories("repository")
@@ -36,5 +38,9 @@ public class EwdExamenopdrachtApplication implements WebMvcConfigurer{
     @Bean
     BookService bookService() {
         return new BookServiceImpl();
+    }
+    @Bean
+    UserService userService() {
+        return new UserServiceImpl();
     }
 }

@@ -13,6 +13,7 @@ import service.BookService;
 import service.BookServiceImpl;
 import service.UserService;
 import service.UserServiceImpl;
+import validator.BookRegistrationValidator;
 
 @SpringBootApplication
 @EnableJpaRepositories("repository")
@@ -42,5 +43,10 @@ public class EwdExamenopdrachtApplication implements WebMvcConfigurer{
     @Bean
     UserService userService() {
         return new UserServiceImpl();
+    }
+
+    @Bean
+    BookRegistrationValidator bookRegistrationValidator() {
+        return new BookRegistrationValidator();
     }
 }

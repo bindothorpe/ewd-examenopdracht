@@ -51,21 +51,17 @@ public class BooksController {
         return "bookOverview";
     }
 
-//    @PostMapping(value = "/remove/{id}")
-//    public String removeBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
-//        bookService.removeUserFromUsersList(id, userRepository.findByUsername(auth.getName()).getId());
-//        return "redirect:/books/" + id;
-//    }
-
     @PostMapping(value = "/add/{id}")
     public String addBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
         bookService.addUserToUsersList(id, userRepository.findByUsername(auth.getName()).getId());
+        System.out.println("add called");
         return "redirect:/books/" + id;
     }
 
     @PostMapping(value = "/remove/{id}")
     public String removeBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
         bookService.removeUserFromUsersList(id, userRepository.findByUsername(auth.getName()).getId());
+        System.out.println("remove called");
         return "redirect:/books/" + id;
     }
 

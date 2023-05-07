@@ -40,7 +40,7 @@
 
             <!--            grid-->
             <a class="w-64 p-4 h-auto bg-white flex flex-col rounded-md drop-shadow-md hover:border-purple-500 border-2 overflow-hidden" th:each="book: ${books}"
-               th:href="|/book/${book.getId()}|">
+               th:href="|/books/${book.getId()}|">
                 <!--            book cover-->
                 <div class="flex w-40 overflow-hidden mx-auto">
                     <img class="object-cover w-40 h-64" th:alt="${book.getTitle()}" th:src="@{${book.getCoverUrl()}}"/>

@@ -52,6 +52,9 @@ public class InitDataConfig implements CommandLineRunner {
             for (User user : users) {
                 if (user.getUsername().equals("nameAdmin"))
                     continue;
+
+                if(book.getTitle().equals("Verslaaft aan liefde"))
+                    continue;
                 user.getBookList().add(book);
                 book.getUsersList().add(user);
             }

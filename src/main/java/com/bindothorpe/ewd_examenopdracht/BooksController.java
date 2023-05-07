@@ -60,6 +60,7 @@ public class BooksController {
 
     @PostMapping(value = "/remove/{id}")
     public String removeBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth) {
+        System.out.println("remove called");
         bookService.removeUserFromUsersList(id, userRepository.findByUsername(auth.getName()).getId());
         System.out.println("remove called");
         return "redirect:/books/" + id;

@@ -26,6 +26,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM user_book_list l WHERE l.users_list_id = :userId AND book_list_id = :bookId)", nativeQuery = true)
+    @Query(value = "DELETE FROM user_book_list l WHERE l.users_list_id = :userId AND l.book_list_id = :bookId)", nativeQuery = true)
     void removeUserFromUsersList(Long bookId, Long userId);
 }

@@ -44,59 +44,96 @@
     <!-- input for book info-->
     <span class="text-2xl col-span-3">General Information</span>
 
-    <input class="w-full col-span-3 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Title" th:field="*{bookTitle}"
+    <input class="w-full col-span-3 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"
+           placeholder="Title" th:field="*{bookTitle}"
            type="text"/>
     <p class="col-span-3 text-red-300" th:errors="*{bookTitle}" th:if="${#fields.hasErrors('bookTitle')}"></p>
 
-    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="ISBN" th:field="*{bookISBN}"
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="ISBN"
+           th:field="*{bookISBN}"
            type="text"/>
-    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Cover URL" th:field="*{bookCoverUrl}"
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Cover URL"
+           th:field="*{bookCoverUrl}"
            type="text"/>
-    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Price" th:field="*{bookPrice}"
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Price"
+           th:field="*{bookPrice}"
            type="number"/>
 
     <p class="col-span-3 text-red-300" th:errors="*{bookISBN}" th:if="${#fields.hasErrors('bookISBN')}"></p>
     <p class="col-span-3 text-red-300" th:errors="*{bookCoverUrl}" th:if="${#fields.hasErrors('bookCoverUrl')}"></p>
     <p class="col-span-3 text-red-300" th:errors="*{bookPrice}" th:if="${#fields.hasErrors('bookPrice')}"></p>
 
-    <!--    <span class="text-2xl col-span-3">Author Information</span>-->
+    <span class="text-2xl col-span-3">Author Information</span>
 
-    <!--&lt;!&ndash;    input for author info&ndash;&gt;-->
-    <!--    <input type="text" name="author1" placeholder="Author 1" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="text" name="author2" placeholder="Author 2" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="text" name="author3" placeholder="Author 3" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
+    <!--    input for author info-->
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Author 1"
+           th:field="*{bookAuthor1}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Author 2"
+           th:field="*{bookAuthor2}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Author 3"
+           th:field="*{bookAuthor3}"
+           type="text"/>
 
+    <p class="col-span-3 text-red-300" th:errors="*{bookAuthor1}" th:if="${#fields.hasErrors('bookAuthor1')}"></p>
 
     <!--    <th:block th:if="${error}">-->
     <!--        <span class="col-span-3 text-red-300">There is an error with the author information.</span>-->
     <!--    </th:block>-->
 
-    <!--    <span class="text-2xl col-span-3">Location Information</span>-->
-    <!--    &lt;!&ndash;    input for location info&ndash;&gt;-->
-    <!--    <input type="number" name="location1Code1" placeholder="Location 1 Code 1" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="number" name="location1Code2" placeholder="Location 1 Code 2" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="text" name="location1Name" placeholder="Location 1 Name" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
+    <span class="text-2xl col-span-3">Location Information</span>
+    <!--    input for location info-->
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"
+           placeholder="Location 1 Code 1" th:field="*{bookLocation1Code1}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"
+           placeholder="Location 1 Code 2" th:field="*{bookLocation1Code2}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Location 1 Name"
+           th:field="*{bookLocation1Name}"
+           type="text"/>
 
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation1Code1}"
+       th:if="${#fields.hasErrors('bookLocation1Code1')}"></p>
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation1Code2}"
+       th:if="${#fields.hasErrors('bookLocation1Code2')}"></p>
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation1Name}"
+       th:if="${#fields.hasErrors('bookLocation1Name')}"></p>
 
-    <!--    <th:block th:if="${error}">-->
-    <!--        <span class="col-span-3 text-red-300">There is an error with the location 1 information.</span>-->
-    <!--    </th:block>-->
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"
+           placeholder="Location 2 Code 1" th:field="*{bookLocation2Code1}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"
+           placeholder="Location 2 Code 2" th:field="*{bookLocation2Code2}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Location 2 Name"
+           th:field="*{bookLocation2Name}"
+           type="text"/>
 
-    <!--    <input type="text" name="location2Code1" placeholder="Location 2 Code 1" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="text" name="location2Code2" placeholder="Location 2 Code 2" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="text" name="location2Name" placeholder="Location 2 Name" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation2Code1}"
+       th:if="${#fields.hasErrors('bookLocation2Code1')}"></p>
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation2Code2}"
+       th:if="${#fields.hasErrors('bookLocation2Code2')}"></p>
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation2Name}"
+       th:if="${#fields.hasErrors('bookLocation2Name')}"></p>
 
-    <!--    <th:block th:if="${error}">-->
-    <!--        <span class="col-span-3 text-red-300">There is an error with the location 2 information.</span>-->
-    <!--    </th:block>-->
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"
+           placeholder="Location 3 Code 1" th:field="*{bookLocation3Code1}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"
+           placeholder="Location 3 Code 2" th:field="*{bookLocation3Code2}"
+           type="text"/>
+    <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Location 3 Name"
+           th:field="*{bookLocation3Name}"
+           type="text"/>
 
-    <!--    <input type="text" name="location3Code1" placeholder="Location 3 Code 1" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="text" name="location3Code2" placeholder="Location 3 Code 2" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-    <!--    <input type="text" name="location3Name" placeholder="Location 3 Name" class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2"/>-->
-
-    <!--    <th:block th:if="${error}">-->
-    <!--        <span class="col-span-3 text-red-300">There is an error with the location 3 information.</span>-->
-    <!--    </th:block>-->
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation3Code1}"
+       th:if="${#fields.hasErrors('bookLocation3Code1')}"></p>
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation3Code2}"
+       th:if="${#fields.hasErrors('bookLocation3Code2')}"></p>
+    <p class="col-span-3 text-red-300" th:errors="*{bookLocation3Name}"
+       th:if="${#fields.hasErrors('bookLocation3Name')}"></p>
 
     <button class="col-span-2 bg-transparent hover:bg-purple-400 text-purple-500 font-bold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded w-64"
             name="submit"

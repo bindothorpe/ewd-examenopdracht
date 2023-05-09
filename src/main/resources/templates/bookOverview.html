@@ -54,6 +54,11 @@
                     <span class="font-xl text-gray-500"
                           th:text="|&euro;${#numbers.formatDecimal(book.getPrice(), 1, 2, 'COMMA')}|"></span>
                 </div>
+                <div>
+                    <span class="font-xl">Locations: </span>
+                    <span class="font-xl text-gray-500"
+                          th:text="${book.getLocationsAsString()}"></span>
+                </div>
             </div>
 
             <div>

@@ -65,4 +65,23 @@ public class Book implements Serializable {
         return sb.substring(0, sb.toString().length() - 2);
     }
 
+    public String getLocationsAsString() {
+        if (locations.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (Location location : locations) {
+            sb
+                    .append(location.getLocationName())
+                    .append(" [")
+                    .append(location.getLocationCode1())
+                    .append(", ")
+                    .append(location.getLocationCode2())
+                    .append("]")
+                    .append(", ");
+        }
+        return sb.substring(0, sb.toString().length() - 2);
+    }
+
 }

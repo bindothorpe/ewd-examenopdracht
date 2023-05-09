@@ -17,6 +17,12 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     Book findByISBN(String isbn);
     Book findByTitle(String title);
 
+    @Query("SELECT b FROM Book b JOIN b.authors a WHERE a.name = :authorName")
+    List<Book> findBooksByAuthorName(@Param("authorName") String authorName);
+
+    @Query("SELECT b FROM Book b JOIN b.authors a WHERE a.id = :id")
+    List<Book> findBooksByAuthorId(@Param("id") Long authorId);
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO user_book_list (users_list_id, book_list_id) VALUES (:userId, :bookId)", nativeQuery = true)

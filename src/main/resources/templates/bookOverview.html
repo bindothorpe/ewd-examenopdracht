@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Book Overview</title>
+    <title th:text="#{book_overview.title}"></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -12,17 +12,17 @@
         <a href="/books">
             <img class="h-8" th:alt="logo" th:src="@{/logo.png}"/>
         </a>
-        <span class="pl-5 cursor-default" th:text="|Hi ${user.getUsername()} (${role})|" ></span>
+        <span class="pl-5 cursor-default" th:text="|#{header.greeting} ${user.getUsername()} (${role})|" ></span>
     </div>
     <div class="flex py-5">
-        <a class="pr-2" href="/books">books</a>
-        <a class="pr-2" href="/popular">popular</a>
+        <a class="pr-2" href="/books" th:text="#{header.books}"></a>
+        <a class="pr-2" href="/popular"th:text="#{header.popular}"></a>
         <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-            <a class="pr-2" href="/create">create</a>
+            <a class="pr-2" href="/create"th:text="#{header.create}"></a>
         </th:block>
         <a class="flex pr-5 pb-1">
             <form class="flex" method="post" th:action="@{/logout}">
-                <input class="cursor-pointer" type="submit" value="logout"/>
+                <input class="cursor-pointer" type="submit" th:value="#{header.logout}"/>
                 <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
             </form>
         </a>
@@ -38,24 +38,24 @@
             <div>
                 <span class="block font-bold text-3xl break-words" th:text="${book.getTitle()}"></span>
                 <div>
-                    <span class="font-xl">Authors: </span>
+                    <span class="font-xl" th:text="|#{book_overview.authors}: |"></span>
                     <span class="font-xl text-gray-500 break-words" th:text="${book.getAuthorsAsString()}"></span>
                 </div>
                 <div>
-                    <span class="font-xl">ISBN: </span>
+                    <span class="font-xl" th:text="|#{book_overview.isbn}: |"></span>
                     <span class="font-xl text-gray-500" th:text="${book.getISBN()}"></span>
                 </div>
                 <div>
-                    <span class="font-xl">Favorites: </span>
+                    <span class="font-xl" th:text="|#{book_overview.favorites}: |"></span>
                     <span class="font-xl text-gray-500" th:text="${book.getUsersList().size()}"></span>
                 </div>
                 <div>
-                    <span class="font-xl">Price: </span>
+                    <span class="font-xl" th:text="|#{book_overview.price}: |"></span>
                     <span class="font-xl text-gray-500"
                           th:text="|&euro;${#numbers.formatDecimal(book.getPrice(), 1, 2, 'COMMA')}|"></span>
                 </div>
                 <div>
-                    <span class="font-xl">Locations: </span>
+                    <span class="font-xl" th:text="|#{book_overview.locations}: |"></span>
                     <span class="font-xl text-gray-500"
                           th:text="${book.getLocationsAsString()}"></span>
                 </div>
@@ -63,7 +63,7 @@
 
             <div>
 
-                <p th:if="${message != null}" th:text="${message}" class="w-64 text-center"></p>
+                <p th:if="${message != null}" th:text="#{${message}}" class="w-64 text-center"></p>
 
                 <th:block th:unless="${hasBook}">
                     <th:block th:unless="${reachedBookLimit}">
@@ -71,7 +71,7 @@
                         <form action="#" method="post" th:action="|add/${book.getId()}|">
                             <input class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded w-64"
                                    type="submit"
-                                   value="Add to favorites"/>
+                                   th:value="#{book_overview.button.add}"/>
                         </form>
 
                     </th:block>
@@ -81,7 +81,7 @@
                     <form action="#" method="post" th:action="|remove/${book.getId()}|">
                         <input class="bg-transparent hover:bg-purple-400 text-purple-500 font-bold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded w-64"
                                type="submit"
-                               value="Remove from favorites"/>
+                               th:value="#{book_overview.button.remove}"/>
                     </form>
                 </th:block>
 

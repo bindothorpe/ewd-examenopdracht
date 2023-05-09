@@ -61,7 +61,7 @@ public class BooksController {
     @PostMapping(value = "/add/{id}")
     public String addBookToUser(@PathVariable("id") Long id, Model model, Authentication auth, RedirectAttributes redirectAttributes) {
         bookService.addUserToUsersList(id, userService.findByUsername(auth.getName()).getId());
-        redirectAttributes.addFlashAttribute("message", "Book added to your list");
+        redirectAttributes.addFlashAttribute("message", "book_overview.message.add");
         return "redirect:/books/" + id;
     }
 
@@ -69,7 +69,7 @@ public class BooksController {
     @PostMapping(value = "/remove/{id}")
     public String removeBookFromUser(@PathVariable("id") Long id, Model model, Authentication auth, RedirectAttributes redirectAttributes) {
         bookService.removeUserFromUsersList(id, userService.findByUsername(auth.getName()).getId());
-        redirectAttributes.addFlashAttribute("message", "Book removed from your list");
+        redirectAttributes.addFlashAttribute("message", "book_overview.message.remove");
 
         return "redirect:/books/" + id;
     }

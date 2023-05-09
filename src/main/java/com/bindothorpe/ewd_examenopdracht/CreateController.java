@@ -76,7 +76,9 @@ public class CreateController {
         authorService.saveAll(authors);
         locationService.saveAll(locations);
 
-        return "create";
+        Book b = bookService.findByISBN(book.getISBN());
+
+        return "redirect:books/" + b.getId();
     }
 
 }

@@ -63,7 +63,10 @@ public class BookRegistrationValidator implements Validator {
             return;
         }
 
-        System.out.println("Location: " + locNumber);
+        //give me a regex that only allows letters and spaces
+        if(name.matches(".*[^a-zA-Z\\s].*")) {
+            errors.rejectValue("bookLocation" + locNumber + "Name", "bookRegistration.bookLocation" + locNumber + "Name.invalid", "Please enter a valid name (only letters and spaces)");
+        }
 
         //Check if location codes are numbers
         int code1;

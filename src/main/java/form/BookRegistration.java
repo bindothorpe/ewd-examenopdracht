@@ -6,7 +6,6 @@ import domain.Location;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
 import validation.DecimalString;
 import validation.ISBN;
 
@@ -30,27 +29,19 @@ public class BookRegistration {
     private String bookCoverUrl;
 
     private String bookAuthor1;
-
     private String bookAuthor2;
-
     private String bookAuthor3;
 
     private String bookLocation1Code1;
-
     private String bookLocation1Code2;
-
     private String bookLocation1Name;
 
     private String bookLocation2Code1;
-
     private String bookLocation2Code2;
-
     private String bookLocation2Name;
 
     private String bookLocation3Code1;
-
     private String bookLocation3Code2;
-
     private String bookLocation3Name;
 
     public Book getBook() {

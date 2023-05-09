@@ -1,6 +1,9 @@
 package service;
 
 import domain.Book;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface BookService {
 
@@ -10,6 +13,9 @@ public interface BookService {
     void addUserToUsersList(Long bookId, Long userId);
     void removeUserFromUsersList(Long bookId, Long userId);
     void save(Book book);
+
+    List<Book> findBooksByAuthorId(Long authorId);
+    List<Book> findBooksByAuthorName( String authorName);
 
 
 

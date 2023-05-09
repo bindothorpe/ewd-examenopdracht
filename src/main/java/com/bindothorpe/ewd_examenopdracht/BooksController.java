@@ -1,5 +1,6 @@
 package com.bindothorpe.ewd_examenopdracht;
 
+import domain.Author;
 import domain.Book;
 import domain.User;
 import org.springframework.security.core.Authentication;
@@ -49,7 +50,6 @@ public class BooksController {
         model.addAttribute("reachedBookLimit", user.getBookList().size() >= user.getMaxBooks());
 
         String message = (String) redirectAttributes.getFlashAttributes().get("message");
-
         if(message != null)
             model.addAttribute("message", message);
 

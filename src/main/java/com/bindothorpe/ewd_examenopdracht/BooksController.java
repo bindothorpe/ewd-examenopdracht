@@ -1,6 +1,5 @@
 package com.bindothorpe.ewd_examenopdracht;
 
-import domain.Author;
 import domain.Book;
 import domain.User;
 import org.springframework.security.core.Authentication;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.BookService;
 import service.UserService;
+import util.Text;
 
 @Controller
 @RequestMapping("/books")
@@ -28,6 +28,7 @@ public class BooksController {
     @GetMapping
     public String showView(Model model, Authentication auth){
         model.addAttribute("user", userService.findByUsername(auth.getName()));
+        model.addAttribute("role", Text.refactorRoleName(auth.getAuthorities().toArray()[0].toString()));
         model.addAttribute("books", bookService.findAll());
 
         return "books";
@@ -44,8 +45,9 @@ public class BooksController {
 
         User user = userService.findByUsername(auth.getName());
 
-        model.addAttribute("book", book);
         model.addAttribute("user", user);
+        model.addAttribute("role", Text.refactorRoleName(auth.getAuthorities().toArray()[0].toString()));
+        model.addAttribute("book", book);
         model.addAttribute("hasBook", book.getUsersList().contains(user));
         model.addAttribute("reachedBookLimit", user.getBookList().size() >= user.getMaxBooks());
 

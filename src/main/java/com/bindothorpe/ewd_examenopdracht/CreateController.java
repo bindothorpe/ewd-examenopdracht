@@ -13,15 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import repository.BookRepository;
 import service.AuthorService;
 import service.BookService;
 import service.LocationService;
 import service.UserService;
+import util.Text;
 import validator.BookRegistrationValidator;
 
-import javax.swing.text.html.HTMLDocument;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -42,6 +40,7 @@ public class CreateController {
     @GetMapping
     public String showView(Model model, Authentication auth) {
         model.addAttribute("user", userService.findByUsername(auth.getName()));
+        model.addAttribute("role", Text.refactorRoleName(auth.getAuthorities().toArray()[0].toString()));
         model.addAttribute("bookRegistration", new BookRegistration());
         return "create";
     }

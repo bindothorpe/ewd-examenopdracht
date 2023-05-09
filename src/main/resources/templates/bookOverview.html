@@ -66,11 +66,15 @@
                 <p th:if="${message != null}" th:text="${message}" class="w-64 text-center"></p>
 
                 <th:block th:unless="${hasBook}">
-                    <form action="#" method="post" th:action="|add/${book.getId()}|">
-                        <input class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded w-64"
-                               type="submit"
-                               value="Add to favorites"/>
-                    </form>
+                    <th:block th:unless="${reachedBookLimit}">
+
+                        <form action="#" method="post" th:action="|add/${book.getId()}|">
+                            <input class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded w-64"
+                                   type="submit"
+                                   value="Add to favorites"/>
+                        </form>
+
+                    </th:block>
                 </th:block>
 
                 <th:block th:if="${hasBook}">

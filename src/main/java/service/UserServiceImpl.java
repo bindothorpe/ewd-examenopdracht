@@ -15,4 +15,9 @@ public class UserServiceImpl implements UserService{
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public int findMaxBooksById(Long id) {
+        return userRepository.findMaxBooksById(id);
+    }
 }

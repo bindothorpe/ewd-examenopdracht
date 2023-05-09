@@ -1,6 +1,7 @@
 package com.bindothorpe.ewd_examenopdracht;
 
 import domain.Book;
+import domain.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,9 +41,12 @@ public class BooksController {
             return "redirect:/books";
         }
 
+        User user = userService.findByUsername(auth.getName());
+
         model.addAttribute("book", book);
-        model.addAttribute("user", userService.findByUsername(auth.getName()));
-        model.addAttribute("hasBook", book.getUsersList().contains(userService.findByUsername(auth.getName())));
+        model.addAttribute("user", user);
+        model.addAttribute("hasBook", book.getUsersList().contains(user));
+        model.addAttribute("reachedBookLimit", user.getBookList().size() >= user.getMaxBooks());
 
         String message = (String) redirectAttributes.getFlashAttributes().get("message");
 

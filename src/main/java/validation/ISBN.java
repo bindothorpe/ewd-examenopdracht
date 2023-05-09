@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy=ISBNValidator.class)
 public @interface ISBN {
 
-    String message() default "The control number of the ISBN is invalid";
+    String message() default "{error.book.isbn.invalid.check}";
     Class<?>[] groups() default {};
     public abstract Class<? extends Payload>[] payload() default {};
 }

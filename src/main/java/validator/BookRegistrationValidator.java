@@ -27,7 +27,7 @@ public class BookRegistrationValidator implements Validator {
 
         //Check if at least one author is filled in
         if (bookRegistration.getBookAuthor1().isBlank() && bookRegistration.getBookAuthor2().isBlank() && bookRegistration.getBookAuthor3().isBlank()) {
-            errors.rejectValue("bookAuthor1", "bookRegistration.bookAuthor1.invalid", "Please enter at least one Author");
+            errors.rejectValue("bookAuthor1", "error.book.authors.empty");
         }
 
         //Check if at least one location is filled in and valid
@@ -35,14 +35,14 @@ public class BookRegistrationValidator implements Validator {
 
         //Check if the book is already present
         if (isBookAlreadyPresent(bookRegistration)) {
-            errors.rejectValue("bookISBN", "bookRegistration.bookISBN.invalid", "Book already present");
+            errors.rejectValue("bookISBN", "error.book.isbn.already_present");
         }
 
     }
 
     private void handleLocationValidation(BookRegistration bookRegistration, Errors errors) {
         if (areAllLocationsEmpty(bookRegistration)) {
-            errors.rejectValue("bookLocation3Code1", "bookRegistration.bookLocation1Code1.invalid", "Please fill in at least one location");
+            errors.rejectValue("bookLocation3Code1", "error.book.locations.empty");
             return;
         }
 
@@ -55,7 +55,7 @@ public class BookRegistrationValidator implements Validator {
     private void handleLocationValidation(int locNumber, String locCode1, String locCode2, String name, Errors errors) {
         //Check if location 1 has an empty field
         if (isLocationNotFullyFilled(locCode1, locCode2, name)) {
-            errors.rejectValue("bookLocation" + locNumber + "Code1", "bookRegistration.bookLocation" + locNumber + "Code1.invalid", "Please fill in all location " + locNumber + " fields");
+            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.empty.field");
             return;
         }
 
@@ -65,7 +65,7 @@ public class BookRegistrationValidator implements Validator {
 
         //give me a regex that only allows letters and spaces
         if(name.matches(".*[^a-zA-Z\\s].*")) {
-            errors.rejectValue("bookLocation" + locNumber + "Name", "bookRegistration.bookLocation" + locNumber + "Name.invalid", "Please enter a valid name (only letters and spaces)");
+            errors.rejectValue("bookLocation" + locNumber + "Name", "error.book.location.name.invalid");
         }
 
         //Check if location codes are numbers
@@ -75,26 +75,26 @@ public class BookRegistrationValidator implements Validator {
             code1 = Integer.parseInt(locCode1);
             code2 = Integer.parseInt(locCode2);
         } catch (NumberFormatException e) {
-            errors.rejectValue("bookLocation" + locNumber + "Code1", "bookRegistration.bookLocation" + locNumber + "Code1.invalid", "Please enter a number");
+            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.code.invalid");
             return;
         }
 
         //Check if location codes are between 50 and 300
         if(!(code1 >= 50 && code1 <= 300 && code2 >= 50 && code2 <= 300)) {
-            errors.rejectValue("bookLocation" + locNumber + "Code1", "bookRegistration.bookLocation" + locNumber + "Code1.invalid", "Please enter a number between 50 and 300");
+            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.code.range.invalid");
             return;
         }
 
         //Check if the difference between code1 and code2 is at least 50
         if(Math.abs(code1 - code2) < 50) {
-            errors.rejectValue("bookLocation" + locNumber + "Code1", "bookRegistration.bookLocation" + locNumber + "Code1.invalid", "Please enter a number between 50 and 300, at least 50 apart");
+            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.code.difference.invalid");
             return;
         }
 
         //Check if the location already exists
         Location loc = new Location(code1, code2, name);
         if(loc.equals(locationService.findByLocationCode1AndLocationCode2AndLocationName(code1, code2, name))) {
-            errors.rejectValue("bookLocation" + locNumber + "Code1", "bookRegistration.bookLocation" + locNumber + "Code1.invalid", "Location already exists");
+            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.already_present");
             return;
         }
 

@@ -21,7 +21,7 @@ public class ISBNValidator implements ConstraintValidator<ISBN, String> {
 
         // Check if the length is 13
         if (digits.length() != 13) {
-            context.buildConstraintViolationWithTemplate("The format of the ISBN is invalid")
+            context.buildConstraintViolationWithTemplate("{error.book.isbn.invalid.format}")
                     .addConstraintViolation();
             return false;
         }

@@ -12,16 +12,19 @@ public class ISBNValidator implements ConstraintValidator<ISBN, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return isValidISBN(value);
+        return isValidISBN(value, context);
     }
 
-    private boolean isValidISBN(String isbn) {
+    private boolean isValidISBN(String isbn, ConstraintValidatorContext context) {
         // Remove all non-digit characters
         String digits = isbn.replaceAll("[^\\d]", "");
 
         // Check if the length is 13
-        if (digits.length() != 13)
+        if (digits.length() != 13) {
+            context.buildConstraintViolationWithTemplate("The format of the ISBN is invalid")
+                    .addConstraintViolation();
             return false;
+        }
 
 
         // Calculate the check digit

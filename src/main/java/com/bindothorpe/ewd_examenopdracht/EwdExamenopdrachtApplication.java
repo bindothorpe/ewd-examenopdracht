@@ -9,15 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import service.BookService;
-import service.BookServiceImpl;
-import service.UserService;
-import service.UserServiceImpl;
+import service.*;
+import validator.BookRegistrationValidator;
 
 @SpringBootApplication
 @EnableJpaRepositories("repository")
 @EntityScan("domain")
-public class EwdExamenopdrachtApplication implements WebMvcConfigurer{
+public class EwdExamenopdrachtApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
         SpringApplication.run(EwdExamenopdrachtApplication.class, args);
@@ -39,8 +37,24 @@ public class EwdExamenopdrachtApplication implements WebMvcConfigurer{
     BookService bookService() {
         return new BookServiceImpl();
     }
+
+    @Bean
+    AuthorService authorService() {
+        return new AuthorServiceImpl();
+    }
+
     @Bean
     UserService userService() {
         return new UserServiceImpl();
+    }
+
+    @Bean
+    LocationService locationService() {
+        return new LocationServiceImpl();
+    }
+
+    @Bean
+    BookRegistrationValidator bookRegistrationValidator() {
+        return new BookRegistrationValidator();
     }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 
 )
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(exclude = "id")
 @ToString(exclude = "id")

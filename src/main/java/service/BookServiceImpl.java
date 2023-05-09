@@ -23,6 +23,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book findByISBN(String isbn) {
+        return bookRepository.findByISBN(isbn);
+    }
+
+    @Override
     public void addUserToUsersList(Long bookId, Long userId) {
         bookRepository.addUserToUsersList(bookId, userId);
     }
@@ -31,4 +36,10 @@ public class BookServiceImpl implements BookService {
     public void removeUserFromUsersList(Long bookId, Long userId) {
         bookRepository.removeUserFromUsersList(bookId, userId);
     }
+    @Override
+    public void save(Book book) {
+        bookRepository.save(book);
+    }
+
+
 }

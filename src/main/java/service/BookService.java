@@ -9,5 +9,8 @@ public interface BookService {
     Book findByISBN(String isbn);
     void addUserToUsersList(Long bookId, Long userId);
     void removeUserFromUsersList(Long bookId, Long userId);
+    void save(Book book);
+
+
 
 }

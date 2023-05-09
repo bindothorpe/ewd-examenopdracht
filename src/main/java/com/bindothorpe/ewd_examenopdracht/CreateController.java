@@ -1,5 +1,8 @@
 package com.bindothorpe.ewd_examenopdracht;
 
+import domain.Author;
+import domain.Book;
+import domain.Location;
 import form.BookRegistration;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import repository.BookRepository;
+import service.AuthorService;
+import service.BookService;
+import service.LocationService;
 import service.UserService;
 import validator.BookRegistrationValidator;
+
+import javax.swing.text.html.HTMLDocument;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/create")
@@ -20,14 +30,18 @@ public class CreateController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private LocationService locationService;
+    @Autowired
+    private AuthorService authorService;
     @Autowired
     private BookRegistrationValidator validator;
 
     @GetMapping
     public String showView(Model model, Authentication auth) {
         model.addAttribute("user", userService.findByUsername(auth.getName()));
-//        model.addAttribute("error", false);
         model.addAttribute("bookRegistration", new BookRegistration());
         return "create";
     }
@@ -43,6 +57,24 @@ public class CreateController {
             model.addAttribute("error", true);
             return "create";
         }
+
+        Book book = bookRegistration.getBook();
+        List<Location> locations = bookRegistration.getLocations();
+        List<Author> authors = bookRegistration.getAuthors();
+
+        for(Location loc : locations) {
+            loc.setBook(book);
+            book.getLocations().add(loc);
+        }
+
+        for(Author author : authors) {
+            author.getBookList().add(book);
+            book.getAuthors().add(author);
+        }
+
+        bookService.save(book);
+        authorService.saveAll(authors);
+        locationService.saveAll(locations);
 
         return "create";
     }

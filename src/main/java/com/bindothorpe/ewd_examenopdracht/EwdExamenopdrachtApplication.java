@@ -39,12 +39,19 @@ public class EwdExamenopdrachtApplication implements WebMvcConfigurer {
     }
 
     @Bean
+    AuthorService authorService() {
+        return new AuthorServiceImpl();
+    }
+
+    @Bean
     UserService userService() {
         return new UserServiceImpl();
     }
 
     @Bean
-    LocationService locationService() { return new LocationServiceImpl(); }
+    LocationService locationService() {
+        return new LocationServiceImpl();
+    }
 
     @Bean
     BookRegistrationValidator bookRegistrationValidator() {

@@ -36,4 +36,10 @@ public class BookServiceImpl implements BookService {
     public void removeUserFromUsersList(Long bookId, Long userId) {
         bookRepository.removeUserFromUsersList(bookId, userId);
     }
+    @Override
+    public void save(Book book) {
+        bookRepository.save(book);
+    }
+
+
 }

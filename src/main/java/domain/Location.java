@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(exclude = {"id", "book"})
 @ToString(exclude = "id")

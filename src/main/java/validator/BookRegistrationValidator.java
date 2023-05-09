@@ -3,10 +3,15 @@ package validator;
 import domain.Location;
 import form.BookRegistration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import service.BookService;
 import service.LocationService;
+
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Objects;
 
 public class BookRegistrationValidator implements Validator {
 
@@ -79,15 +84,26 @@ public class BookRegistrationValidator implements Validator {
             return;
         }
 
+        int min = 50;
+        int max = 300;
+        int diff = 50;
         //Check if location codes are between 50 and 300
-        if(!(code1 >= 50 && code1 <= 300 && code2 >= 50 && code2 <= 300)) {
-            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.code.range.invalid");
+        if(!(code1 >= min && code1 <= max && code2 >= min && code2 <= max)) {
+            int[] args = {min, max};
+            String[] strings = Arrays.stream(args)
+                    .mapToObj(String::valueOf)
+                    .toArray(String[]::new);
+            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.code.range.invalid", strings, "Something went wrong");
             return;
         }
 
         //Check if the difference between code1 and code2 is at least 50
-        if(Math.abs(code1 - code2) < 50) {
-            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.code.difference.invalid");
+        if(Math.abs(code1 - code2) < diff) {
+            int[] args = {min, max, diff};
+            String[] strings = Arrays.stream(args)
+                    .mapToObj(String::valueOf)
+                    .toArray(String[]::new);
+            errors.rejectValue("bookLocation" + locNumber + "Code1", "error.book.location.code.difference.invalid", strings, "Something went wrong");
             return;
         }
 

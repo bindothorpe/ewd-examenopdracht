@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(exclude = "id")
+@EqualsAndHashCode(exclude = {"id", "book"})
 @ToString(exclude = "id")
 public class Location implements Serializable {
 
@@ -23,6 +24,11 @@ public class Location implements Serializable {
 
     @ManyToOne
     private Book book;
+
+    public Location(int locationCode1, int locationCode2, String locationName) {
+        setLocationCodes(locationCode1, locationCode2);
+        setLocationName(locationName);
+    }
 
     public Location(int locationCode1, int locationCode2, String locationName, Book book) {
         setLocationCodes(locationCode1, locationCode2);

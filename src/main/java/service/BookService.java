@@ -9,10 +9,12 @@ public interface BookService {
     Iterable<Book> findAll();
 
     Book findById(Long id);
+    Book findByISBN(String isbn);
 
 //    void removeUserFromUsersList(Long bookId, Long userId);
 //
     void addUserToUsersList(Long bookId, Long userId);
 
     void removeUserFromUsersList(Long bookId, Long userId);
+
 }

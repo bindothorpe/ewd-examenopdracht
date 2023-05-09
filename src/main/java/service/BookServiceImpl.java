@@ -23,6 +23,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book findByISBN(String isbn) {
+        return bookRepository.findByISBN(isbn);
+    }
+
+    @Override
     public void addUserToUsersList(Long bookId, Long userId) {
         bookRepository.addUserToUsersList(bookId, userId);
     }

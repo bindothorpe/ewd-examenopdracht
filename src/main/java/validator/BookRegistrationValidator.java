@@ -1,13 +1,19 @@
 package validator;
 
 import form.BookRegistration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import service.BookService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class BookRegistrationValidator implements Validator {
+
+    @Autowired
+    BookService bookService;
 
     @Override
     public boolean supports(Class<?> klass) {
@@ -31,9 +37,9 @@ public class BookRegistrationValidator implements Validator {
         System.out.println("Errors bookRegistration: " + errors.getAllErrors());
 
         //Check if isbn is a valid isbn
-        if (!isValidISBN(bookRegistration.getBookISBN())) {
-            errors.rejectValue("bookISBN", "bookRegistration.bookISBN.invalid", "Invalid ISBN");
-        }
+//        if (!isValidISBN(bookRegistration.getBookISBN())) {
+//            errors.rejectValue("bookISBN", "bookRegistration.bookISBN.invalid", "Invalid ISBN");
+//        }
 
         //Check if at least one author is filled in
         if (bookRegistration.getBookAuthor1().isBlank() && bookRegistration.getBookAuthor2().isBlank()) {
@@ -65,10 +71,6 @@ public class BookRegistrationValidator implements Validator {
             }
         }
 
-
-
-
-
         for(Map.Entry<String, String> e : numericFields.entrySet()) {
             if(!e.getValue().isBlank()) {
                 try {
@@ -77,6 +79,10 @@ public class BookRegistrationValidator implements Validator {
                     errors.rejectValue(e.getKey(), "bookRegistration." + e.getKey() + ".invalid", "Please enter a valid number");
                 }
             }
+        }
+
+        if(isBookAlreadyPresent(bookRegistration)) {
+            errors.rejectValue("bookISBN", "bookRegistration.bookISBN.invalid", "Book already present");
         }
 
     }
@@ -130,26 +136,8 @@ public class BookRegistrationValidator implements Validator {
         return locationCode1 >= 50 && locationCode1 <= 300 && locationCode2 >= 50 && locationCode2 <= 300 && Math.abs(locationCode1 - locationCode2) >= 50;
     }
 
-
-    private boolean isValidISBN(String isbn) {
-        // Remove all non-digit characters
-        String digits = isbn.replaceAll("[^\\d]", "");
-
-        // Check if the length is 13
-        if (digits.length() != 13)
-            return false;
-
-
-        // Calculate the check digit
-        int sum = 0;
-        for (int i = 0; i < 12; i++) {
-            int digit = Integer.parseInt(digits.substring(i, i + 1));
-            sum += (i % 2 == 0) ? digit : 3 * digit;
-        }
-        int checkDigit = (10 - (sum % 10)) % 10;
-
-        // Check if the check digit matches the last digit of the input
-        return checkDigit == Integer.parseInt(digits.substring(12));
+    private boolean isBookAlreadyPresent(BookRegistration bookRegistration) {
+        return bookService.findByISBN(bookRegistration.getBookISBN()) != null;
     }
 
 }

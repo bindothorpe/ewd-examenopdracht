@@ -7,6 +7,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
+import validation.DecimalString;
 import validation.ISBN;
 
 import java.util.ArrayList;
@@ -22,9 +23,8 @@ public class BookRegistration {
     @ISBN
     private String bookISBN;
 
-    @DecimalMin(value = "0.0", inclusive = false, message = "Please enter a valid price")
-    @DecimalMax(value = "100.0", inclusive = false, message = "Please enter a valid price")
-    private double bookPrice;
+    @DecimalString
+    private String bookPrice;
 
     @NotBlank(message = "Please enter a description")
     private String bookCoverUrl;
@@ -54,7 +54,7 @@ public class BookRegistration {
     private String bookLocation3Name;
 
     public Book getBook() {
-        Book b = new Book(bookTitle, bookPrice, bookISBN, bookCoverUrl);
+        Book b = new Book(bookTitle, Double.parseDouble(bookPrice), bookISBN, bookCoverUrl);
         b.getAuthors().addAll(getAuthors());
         b.getLocations().addAll(getLocations());
         return b;

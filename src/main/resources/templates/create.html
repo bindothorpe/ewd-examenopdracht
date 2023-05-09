@@ -57,7 +57,7 @@
            type="text"/>
     <input class="w-64 px-4 py-2 rounded-md drop-shadow-md focus:outline-purple-500 mb-2" placeholder="Price"
            th:field="*{bookPrice}"
-           type="number"/>
+           type="text"/>
 
     <p class="col-span-3 text-red-300" th:errors="*{bookISBN}" th:if="${#fields.hasErrors('bookISBN')}"></p>
     <p class="col-span-3 text-red-300" th:errors="*{bookCoverUrl}" th:if="${#fields.hasErrors('bookCoverUrl')}"></p>

@@ -6,6 +6,7 @@ import domain.Location;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 import validation.DecimalString;
 import validation.ISBN;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Setter
 public class BookRegistration {
 
-    @NotBlank(message = "Please enter a title")
+    @NotBlank(message = "{error.book.title.empty}")
     private String bookTitle;
 
     @ISBN
@@ -25,7 +26,8 @@ public class BookRegistration {
     @DecimalString
     private String bookPrice;
 
-    @NotBlank(message = "Please enter a description")
+    @NotBlank(message = "{error.book.cover.empty}")
+    @URL(message = "{error.book.cover.empty}")
     private String bookCoverUrl;
 
     private String bookAuthor1;

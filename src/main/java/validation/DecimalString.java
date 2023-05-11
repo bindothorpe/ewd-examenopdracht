@@ -13,7 +13,9 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy=DecimalStringValidator.class)
 public @interface DecimalString {
 
-    String message() default "Please enter a decimal number between 0 and 100";
+    String message() default "{error.book.price.invalid}";
+    double min() default 0;
+    double max() default 100;
     Class<?>[] groups() default {};
     public abstract Class<? extends Payload>[] payload() default {};
 }

@@ -1,4 +1,4 @@
-package com.bindothorpe.ewd_examenopdracht;
+package com.bindothorpe.ewd_examenopdracht.controllers;
 
 import domain.Author;
 import domain.Book;

@@ -50,6 +50,7 @@ public class CreateController {
         validator.validate(bookRegistration, result);
 
         model.addAttribute("user", userService.findByUsername(auth.getName()));
+        model.addAttribute("role", Text.refactorRoleName(auth.getAuthorities().toArray()[0].toString()));
 
 
         if(result.hasErrors()) {

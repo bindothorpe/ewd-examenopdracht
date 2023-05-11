@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Unknown page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<!--    Header-->
+<div class="bg-purple-500 text-white text-xl font-bold w-screen flex align-middle justify-between align-middle sticky top-0 z-50">
+  <div class="py-5 pl-5 flex align-middle">
+    <a href="/books">
+      <img class="h-8" th:alt="logo" th:src="@{/logo.png}"/>
+    </a>
+    <span class="pl-5 cursor-default" th:text="|Hi ${user.getUsername()} (${role})|" ></span>
+  </div>
+  <div class="flex py-5">
+    <a class="pr-2" href="/books">books</a>
+    <a class="pr-2" href="/popular">popular</a>
+    <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+      <a class="pr-2" href="/create">create</a>
+    </th:block>
+    <a class="flex pr-5 pb-1">
+      <form class="flex" method="post" th:action="@{/logout}">
+        <input class="cursor-pointer" type="submit" value="logout"/>
+        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+      </form>
+    </a>
+  </div>
+</div>
+
+<div class="flex justify-between">
+  <div class="flex"></div>
+  <span class="text-xl pt-4">HTTP Status 500 - Internal server error</span>
+  <div class="flex"></div>
+</div>
+
+</body>
+</html>

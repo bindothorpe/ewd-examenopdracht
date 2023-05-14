@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.*;
@@ -22,6 +24,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(exclude = "id")
 @ToString(exclude = "id")
+@JsonPropertyOrder({"id", "title", "isbn", "price", "coverUrl", "authors", "locations"})
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,6 +66,12 @@ public class Book implements Serializable {
             sb.append(author.getName()).append(", ");
         }
         return sb.substring(0, sb.toString().length() - 2);
+    }
+
+    //give me a method that adds two numbers
+
+    public int add(int a, int b){
+        return a+b;
     }
 
     public String getLocationsAsString() {

@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class Author implements Serializable {
 
     private String name;
 
+    @JsonIgnore
     @ManyToMany
     private List<Book> bookList;
 

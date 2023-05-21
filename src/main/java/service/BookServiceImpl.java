@@ -26,7 +26,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findByISBN(String isbn) {
-        return bookRepository.findByISBN(isbn.replaceAll("[^0-9]", ""));
+        Book book = bookRepository.findByISBN(isbn.replaceAll("[^0-9]", ""));
+
+        return book == null ? null : book;
     }
 
     @Override

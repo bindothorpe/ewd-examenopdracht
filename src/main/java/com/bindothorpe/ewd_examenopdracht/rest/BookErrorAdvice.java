@@ -1,0 +1,28 @@
+package com.bindothorpe.ewd_examenopdracht.rest;
+
+import exceptions.AuthorNotFoundException;
+import exceptions.BookNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class BookErrorAdvice {
+
+    @ResponseBody
+    @ExceptionHandler(BookNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String employeeNotFoundHandler(BookNotFoundException ex) {
+        return ex.getMessage();
+    }
+
+
+    @ResponseBody
+    @ExceptionHandler(AuthorNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String authorNotFoundHandler(AuthorNotFoundException ex) {
+        return ex.getMessage();
+    }
+}

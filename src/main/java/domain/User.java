@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class User implements Serializable {
 
     private int maxBooks;
 
+    @JsonIgnore
     @ManyToMany
     private List<Book> bookList;
 

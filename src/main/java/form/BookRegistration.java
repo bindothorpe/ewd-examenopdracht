@@ -47,7 +47,7 @@ public class BookRegistration {
     private String bookLocation3Name;
 
     public Book getBook() {
-        Book b = new Book(bookTitle, Double.parseDouble(bookPrice), bookISBN, bookCoverUrl);
+        Book b = new Book(bookTitle, Double.parseDouble(bookPrice), bookISBN.replaceAll("[^0-9]", ""), bookCoverUrl);
         b.getAuthors().addAll(getAuthors());
         b.getLocations().addAll(getLocations());
         return b;

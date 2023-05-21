@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +24,8 @@ public class Location implements Serializable {
     private int locationCode2;
     private String locationName;
 
+
+    @JsonIgnore
     @ManyToOne
     private Book book;
 

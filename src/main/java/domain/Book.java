@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import lombok.*;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
+import util.IsbnUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,6 +55,24 @@ public class Book implements Serializable {
         usersList = new ArrayList<>();
         authors = new ArrayList<>();
         locations = new ArrayList<>();
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setISBN(String ISBN) {
+        if(!IsbnUtil.isValidISBN(ISBN))
+            throw new IllegalArgumentException("Invalid ISBN");
+        this.ISBN = ISBN;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 
     public String getAuthorsAsString() {

@@ -1,5 +1,6 @@
 package com.bindothorpe.ewd_examenopdracht.controllers;
 
+import domain.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,16 @@ public class Error403Controller implements ErrorController {
     @GetMapping("/error")
     public String showView(HttpServletRequest request, Model model, Authentication auth) {
 
+        User user = userService.findByUsername(auth.getName());
+
         model.addAttribute("user", userService.findByUsername(auth.getName()));
+        model.addAttribute("username", user.getUsername());
         model.addAttribute("role", Text.refactorRoleName(auth.getAuthorities().toArray()[0].toString()));
 
 
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+
+        System.out.println(status);
 
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());

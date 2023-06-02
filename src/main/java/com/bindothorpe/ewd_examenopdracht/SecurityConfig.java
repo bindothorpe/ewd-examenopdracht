@@ -36,6 +36,8 @@ public class SecurityConfig {
                                 .requestMatchers("/fragments/loginHeader**").permitAll()
                                 .requestMatchers("/logo.png").permitAll()
                                 .requestMatchers("/403**").permitAll()
+                                .requestMatchers("/404**").permitAll()
+                                .requestMatchers("/500**").permitAll()
                                 .requestMatchers("/create**").hasRole("ADMIN")
                                 .requestMatchers("/books/**")
                                 .access(new WebExpressionAuthorizationManager("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"))

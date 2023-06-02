@@ -12,7 +12,7 @@
     <a href="/books">
       <img class="h-8" th:alt="logo" th:src="@{/logo.png}"/>
     </a>
-    <span class="pl-5 cursor-default" th:text="|Hi ${user.getUsername()} (${role})|" ></span>
+    <span class="pl-5 cursor-default" th:text="|Hi ${username} (${role})|" ></span>
   </div>
   <div class="flex py-5">
     <a class="pr-2" href="/books">books</a>
